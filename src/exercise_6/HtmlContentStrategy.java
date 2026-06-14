@@ -2,10 +2,6 @@ package exercise_6;
 
 import java.io.IOException;
 
-/**
- * Strategy 2: Compares websites by identical HTML content.
- * Two sites are considered identical if their full HTML response strings match exactly.
- */
 public class HtmlContentStrategy implements WebsiteComparisonStrategy {
 
     @Override

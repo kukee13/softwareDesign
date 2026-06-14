@@ -2,11 +2,6 @@ package exercise_6;
 
 import java.io.IOException;
 
-/**
- * Strategy 3: Compares websites by identical visible text content.
- * HTML tags are stripped; only the remaining text is compared.
- * Whitespace is normalised so minor formatting differences are ignored.
- */
 public class TextContentStrategy implements WebsiteComparisonStrategy {
 
     @Override
@@ -21,16 +16,10 @@ public class TextContentStrategy implements WebsiteComparisonStrategy {
         return "Identical Text Content";
     }
 
-    /**
-     * Removes all HTML tags and normalises whitespace to produce plain text.
-     */
     private String extractText(String html) {
-        // Remove <script> and <style> blocks including their content
         String noScript = html.replaceAll("(?si)<script[^>]*>.*?</script>", "");
         String noStyle = noScript.replaceAll("(?si)<style[^>]*>.*?</style>", "");
-        // Strip remaining HTML tags
         String noTags = noStyle.replaceAll("<[^>]+>", "");
-        // Collapse all whitespace to a single space and trim
         return noTags.replaceAll("\\s+", " ").trim();
     }
 }

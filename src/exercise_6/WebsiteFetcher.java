@@ -7,22 +7,13 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
-/**
- * Utility class for fetching raw HTML content from a URL.
- * Shared by all strategy implementations to avoid duplication.
- */
 public class WebsiteFetcher {
 
     private static final int TIMEOUT_MS = 10000;
     private static final String USER_AGENT = "Mozilla/5.0";
 
-    private WebsiteFetcher() {
-        // utility class — not instantiable
-    }
+    private WebsiteFetcher() {}
 
-    /**
-     * Fetches the full HTML response body from the given URL.
-     */
     public static String fetchHtml(String urlString) throws IOException {
         URL url = URI.create(urlString).toURL();
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

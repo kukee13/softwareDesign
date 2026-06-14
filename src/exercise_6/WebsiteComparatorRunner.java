@@ -3,11 +3,6 @@ package exercise_6;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Entry point for Exercise 6.
- * Demonstrates the Strategy pattern by running all three comparison strategies
- * against two URLs and printing results to stdout.
- */
 public class WebsiteComparatorRunner {
 
     public static void main(String[] args) {

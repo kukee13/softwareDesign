@@ -2,10 +2,6 @@ package exercise_6;
 
 import java.io.IOException;
 
-/**
- * Strategy 1: Compares websites by identical content size (byte count of HTML response).
- * Two sites are considered identical if their HTML response has the same length.
- */
 public class ContentSizeStrategy implements WebsiteComparisonStrategy {
 
     @Override
