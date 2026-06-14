@@ -1,0 +1,66 @@
+@startuml
+!theme plain
+title Exercise 6 – Website Comparator: Strategy Pattern
+
+interface WebsiteComparisonStrategy {
+  + compare(url1: String, url2: String): boolean
+  + getName(): String
+}
+
+class ContentSizeStrategy {
+  + compare(url1: String, url2: String): boolean
+  + getName(): String
+}
+
+class HtmlContentStrategy {
+  + compare(url1: String, url2: String): boolean
+  + getName(): String
+}
+
+class TextContentStrategy {
+  - extractText(html: String): String
+  + compare(url1: String, url2: String): boolean
+  + getName(): String
+}
+
+class WebsiteComparator {
+  - strategy: WebsiteComparisonStrategy
+  + WebsiteComparator(strategy: WebsiteComparisonStrategy)
+  + setStrategy(strategy: WebsiteComparisonStrategy): void
+  + getStrategy(): WebsiteComparisonStrategy
+  + compare(url1: String, url2: String): boolean
+}
+
+class WebsiteFetcher {
+  - TIMEOUT_MS: int
+  - USER_AGENT: String
+  + {static} fetchHtml(urlString: String): String
+}
+
+class WebsiteComparatorRunner {
+  + {static} main(args: String[]): void
+}
+
+WebsiteComparisonStrategy <|.. ContentSizeStrategy
+WebsiteComparisonStrategy <|.. HtmlContentStrategy
+WebsiteComparisonStrategy <|.. TextContentStrategy
+
+WebsiteComparator o--> WebsiteComparisonStrategy : uses >
+
+ContentSizeStrategy ..> WebsiteFetcher : calls fetchHtml()
+HtmlContentStrategy ..> WebsiteFetcher : calls fetchHtml()
+TextContentStrategy ..> WebsiteFetcher : calls fetchHtml()
+
+WebsiteComparatorRunner --> WebsiteComparator : creates & drives >
+
+note right of WebsiteComparator
+  Context class.
+  Strategy can be swapped
+  at runtime via setStrategy().
+end note
+
+note bottom of WebsiteComparisonStrategy
+  Strategy interface.
+  Defines the comparison contract.
+end note
+@enduml
